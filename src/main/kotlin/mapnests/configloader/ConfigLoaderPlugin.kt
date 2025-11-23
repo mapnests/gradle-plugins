@@ -1,4 +1,4 @@
-package technonext.configloader
+package mapnests.configloader
 
 import com.android.build.gradle.BaseExtension
 import com.google.gson.Gson
@@ -46,9 +46,9 @@ class ConfigLoaderPlugin : Plugin<Project> {
             val outputDir = project.layout.buildDirectory
                 .dir(
                     if (isLibrary)
-                        "generated/technonext/config/src/main/java/com/technonext/network/generated"
+                        "generated/mapnests/config/src/main/java/com/mapnests/network/generated"
                     else
-                        "generated/technonext/config/src/main/kotlin/com/technonext/mapsdk/generated"
+                        "generated/mapnests/config/src/main/kotlin/com/mapnests/mapsdk/generated"
                 )
                 .get().asFile
             outputDir.mkdirs()
@@ -88,7 +88,7 @@ class ConfigLoaderPlugin : Plugin<Project> {
     }
 
     private fun generateKotlinConfig(config: ClientConfig): String = """
-        package com.technonext.mapsdk.generated
+        package com.mapnests.mapsdk.generated
 
         object BindClientConfig {
             const val KEY_ID = "${config.keyId}"
@@ -99,7 +99,7 @@ class ConfigLoaderPlugin : Plugin<Project> {
     """.trimIndent()
 
     private fun generateJavaConfig(config: ClientConfig): String = """
-        package com.technonext.network.generated;
+        package com.mapnests.network.generated;
 
         public final class BindClientConfigLib {
             private BindClientConfigLib() {}

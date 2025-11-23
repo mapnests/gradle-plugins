@@ -1,6 +1,6 @@
 # Config Loader Gradle Plugin
 
-This Gradle plugin, `com.technonext.config-loader`, automates the process of loading client
+This Gradle plugin, `com.mapnests.config-loader`, automates the process of loading client
 configuration from a JSON file and generating a corresponding Kotlin or Java configuration file
 within your Android project. This allows you to easily access configuration values at build time.
 
@@ -43,7 +43,7 @@ environments (e.g., development, staging, production) by simply changing the
 
    ```kotlin
    plugins {
-       id("com.technonext.config-loader")
+       id("com.mapnests.config-loader")
    }
    ```
 
@@ -55,7 +55,7 @@ code:
 **For Kotlin (Android Applications):**
 
 ```kotlin
-import com.technonext.mapsdk.generated.BindClientConfig
+import com.mapnests.mapsdk.generated.BindClientConfig
 
 // ...
 
@@ -68,7 +68,7 @@ val alg = BindClientConfig.ALG
 **For Java (Android Libraries):**
 
 ```java
-import com.technonext.network.generated.BindClientConfigLib;
+import com.mapnests.network.generated.BindClientConfigLib;
 
 // ...
 

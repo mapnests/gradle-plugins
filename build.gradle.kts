@@ -14,7 +14,7 @@ dependencies {
     implementation("com.android.tools.build:gradle:8.3.2") // <-- match your project AGP version
 }
 
-group = "com.technonext"
+group = "com.mapnests"
 version = "1.0.0"
 
 gradlePlugin {
@@ -22,8 +22,8 @@ gradlePlugin {
     vcsUrl.set("https://github.com/mapnests/gradle-plugins")
     plugins {
         create("configLoader") {
-            id = "com.technonext.config-loader"
-            implementationClass = "technonext.configloader.ConfigLoaderPlugin"
+            id = "com.mapnests.config-loader"
+            implementationClass = "mapnests.configloader.ConfigLoaderPlugin"
             displayName = "Config Loader Plugin"
             description =
                 "A Gradle plugin to load configuration from a JSON file and generate a source file."
