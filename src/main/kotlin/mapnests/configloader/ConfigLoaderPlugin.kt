@@ -18,6 +18,10 @@ class ConfigLoaderPlugin : Plugin<Project> {
         const val PACKAGE_NAME = "package_name"
         const val PUBLIC_KEY = "public_key"
         const val ALG = "alg"
+        const val HASH = "hash"
+        const val SHA256 = "sha256"
+        const val CLIENT_IDENTITY = "client_identity"
+        const val KEY_IDENTIFIER = "key_identifier"
     }
 
     private val gson = Gson()
@@ -26,7 +30,12 @@ class ConfigLoaderPlugin : Plugin<Project> {
         val keyId: String,
         val packageName: String,
         val publicKey: String,
-        val alg: String
+        val alg: String,
+        val HASH: String,
+        val SHA256: String,
+        val CLIENT_IDENTITY: String,
+        val KEY_IDENTIFIER: String,
+
     )
 
     override fun apply(project: Project) {
@@ -83,7 +92,12 @@ class ConfigLoaderPlugin : Plugin<Project> {
             keyId = jsonObj[KEY_ID]?.asString.orEmpty(),
             packageName = jsonObj[PACKAGE_NAME]?.asString.orEmpty(),
             publicKey = jsonObj[PUBLIC_KEY]?.asString.orEmpty(),
-            alg = jsonObj[ALG]?.asString.orEmpty()
+            alg = jsonObj[ALG]?.asString.orEmpty(),
+            HASH = jsonObj[HASH]?.asString.orEmpty(),
+            SHA256 = jsonObj[SHA256]?.asString.orEmpty(),
+            CLIENT_IDENTITY = jsonObj[CLIENT_IDENTITY]?.asString.orEmpty(),
+            KEY_IDENTIFIER = jsonObj[KEY_IDENTIFIER]?.asString.orEmpty(),
+
         )
     }
 
@@ -95,6 +109,11 @@ class ConfigLoaderPlugin : Plugin<Project> {
             const val PACKAGE_NAME = "${config.packageName}"
             const val PUBLIC_KEY = "${config.publicKey}"
             const val ALG = "${config.alg}"
+            const val HASH = "${config.HASH}"
+            const val SHA256 = "${config.SHA256}"
+            const val CLIENT_IDENTITY = "${config.CLIENT_IDENTITY}"
+            const val KEY_IDENTIFIER = "${config.KEY_IDENTIFIER}"
+
         }
     """.trimIndent()
 
@@ -108,6 +127,10 @@ class ConfigLoaderPlugin : Plugin<Project> {
             public static final String PACKAGE_NAME = "${config.packageName}";
             public static final String PUBLIC_KEY = "${config.publicKey}";
             public static final String ALG = "${config.alg}";
+            public static final String HASH = "${config.HASH}";
+            public static final String SHA256 = "${config.SHA256}";
+            public static final String CLIENT_IDENTITY = "${config.CLIENT_IDENTITY}";
+            public static final String KEY_IDENTIFIER = "${config.KEY_IDENTIFIER}"; 
         }
     """.trimIndent()
 }
