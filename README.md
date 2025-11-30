@@ -34,7 +34,11 @@ environments (e.g., development, staging, production) by simply changing the
      "key_id": "your_key_id",
      "package_name": "your_package_name",
      "public_key": "your_public_key",
-     "alg": "your_algorithm"
+     "alg": "your_algorithm",
+     "hash": "your_hash_algorithm",
+     "sha256": "your_sha256_algorithm",
+     "client_identity": "your_client_identity",
+     "key_identifier": "your_key_identifier",
    }
    ```
 
@@ -63,6 +67,11 @@ val keyId = BindClientConfig.KEY_ID
 val packageName = BindClientConfig.PACKAGE_NAME
 val publicKey = BindClientConfig.PUBLIC_KEY
 val alg = BindClientConfig.ALG
+val HASH = BindClientConfig.HASH
+val SHA256 = BindClientConfig.SHA256
+val CLIENT_IDENTITY = BindClientConfig.CLIENT_IDENTITY
+val KEY_IDENTIFIER = BindClientConfig.KEY_IDENTIFIER
+
 ```
 
 **For Java (Android Libraries):**
@@ -76,4 +85,9 @@ String keyId = BindClientConfigLib.KEY_ID;
 String packageName = BindClientConfigLib.PACKAGE_NAME;
 String publicKey = BindClientConfigLib.PUBLIC_KEY;
 String alg = BindClientConfigLib.ALG;
+String HASH = BindClientConfigLib.HASH;
+String SHA256 = BindClientConfigLib.SHA256;
+String CLIENT_IDENTITY = BindClientConfigLib.CLIENT_IDENTITY;
+String KEY_IDENTIFIER = BindClientConfigLib.KEY_IDENTIFIER;
+
 ```
