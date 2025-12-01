@@ -3,7 +3,7 @@
   "component": {
     "group": "com.mapnests",
     "module": "gradle-plugins",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -27,13 +27,13 @@
       },
       "files": [
         {
-          "name": "gradle-plugins-1.0.4.jar",
-          "url": "gradle-plugins-1.0.4.jar",
-          "size": 12533,
-          "sha512": "909514d93cbda8556c15f51be5d669c1bc7f6529140aa1b1798db03b3afceaf53dfc451c45f893864af2a1174087890fa5d99dbcf3977fe1c96515ef5e8996a4",
-          "sha256": "dcc62400e10ba35e98d3cee14260ba15fccaa5ed4f0b29c0ee5d06fcf3904e8e",
-          "sha1": "ea8781eae17be5f98636ea0c3963066e9780fd4a",
-          "md5": "c72dd7fbfb968f02dd6527b1e1cb1352"
+          "name": "gradle-plugins-1.0.5.jar",
+          "url": "gradle-plugins-1.0.5.jar",
+          "size": 12416,
+          "sha512": "00bf6285d545d6cb51b79be94cf2398997683776f07285106bf8f8337a3d958f4fc5e9c3db5611f5d7b07e0e312c6714f01a4ed872db23ab891227bb66743540",
+          "sha256": "ad206966bb30eeb4ae5177d18907178f7b4876d5713eb470a22654515f0c49f9",
+          "sha1": "b461fd545746bb1868dd29b36ff0a6388b4d22d7",
+          "md5": "276894193c884f4e41da83ba5d54016c"
         }
       ]
     },
@@ -66,13 +66,13 @@
       ],
       "files": [
         {
-          "name": "gradle-plugins-1.0.4.jar",
-          "url": "gradle-plugins-1.0.4.jar",
-          "size": 12533,
-          "sha512": "909514d93cbda8556c15f51be5d669c1bc7f6529140aa1b1798db03b3afceaf53dfc451c45f893864af2a1174087890fa5d99dbcf3977fe1c96515ef5e8996a4",
-          "sha256": "dcc62400e10ba35e98d3cee14260ba15fccaa5ed4f0b29c0ee5d06fcf3904e8e",
-          "sha1": "ea8781eae17be5f98636ea0c3963066e9780fd4a",
-          "md5": "c72dd7fbfb968f02dd6527b1e1cb1352"
+          "name": "gradle-plugins-1.0.5.jar",
+          "url": "gradle-plugins-1.0.5.jar",
+          "size": 12416,
+          "sha512": "00bf6285d545d6cb51b79be94cf2398997683776f07285106bf8f8337a3d958f4fc5e9c3db5611f5d7b07e0e312c6714f01a4ed872db23ab891227bb66743540",
+          "sha256": "ad206966bb30eeb4ae5177d18907178f7b4876d5713eb470a22654515f0c49f9",
+          "sha1": "b461fd545746bb1868dd29b36ff0a6388b4d22d7",
+          "md5": "276894193c884f4e41da83ba5d54016c"
         }
       ]
     },
@@ -86,13 +86,13 @@
       },
       "files": [
         {
-          "name": "gradle-plugins-1.0.4-javadoc.jar",
-          "url": "gradle-plugins-1.0.4-javadoc.jar",
+          "name": "gradle-plugins-1.0.5-javadoc.jar",
+          "url": "gradle-plugins-1.0.5-javadoc.jar",
           "size": 261,
-          "sha512": "cbfeb2ef61cf6b1245f9e53b8db1ba4282e80a2157bd6189ea5c700f4545759f419857829ac5a372a7e884d3b26d8c2669a593bd5a915d53013bb9ecd2e3b930",
-          "sha256": "5b6a9baf62a1002f29fe3a9937fdf5e49fd262e3f7b3b17738acf95675276686",
-          "sha1": "d2f0aef538ee6a9da5052b71bf9976369b998d11",
-          "md5": "0dc2c94d62e72ced29eac6adf04e3f07"
+          "sha512": "4c91a057a1215424abb4309cd7183b5c706622bc9c753d895c1fc164bb3cab502243b18fe573bc01440d56f0051a58d58b24bdaf4b75bca3d79652b98156a5a4",
+          "sha256": "73169b7b643efc643b5e56ed74343b5068a4feb8bf26818d9905bba279812f1b",
+          "sha1": "d163e5426100a337dd48eef3067da3277e7944c0",
+          "md5": "69f2939928b7a78fb1beb85d9a1cddc8"
         }
       ]
     },
@@ -106,13 +106,13 @@
       },
       "files": [
         {
-          "name": "gradle-plugins-1.0.4-sources.jar",
-          "url": "gradle-plugins-1.0.4-sources.jar",
-          "size": 2596,
-          "sha512": "96914bc956ba7bae1440e851c78fb5be39f4b40f081302141e547cfa5efd06b78e4dd3a51c701340501a608747d062b947c52031a5cb7e080eef680b749bdd0e",
-          "sha256": "e52182a8dae631cbbca6a859a63df1e52ff7b1b805b73a9f71ef833732c0c5d1",
-          "sha1": "6fe2291a8ec3d799b6a9719b5aa431852ad0dfee",
-          "md5": "6382265fb5626820d1d93e8098808387"
+          "name": "gradle-plugins-1.0.5-sources.jar",
+          "url": "gradle-plugins-1.0.5-sources.jar",
+          "size": 2441,
+          "sha512": "f1aa9a447e58cc179da1bd02de8822dd02524cc5a65cd9257c2230fafe8f78ea21801c1d24119d79c2e195c8e0cc7abfbe094a7e08804ffc326edb09e9dc12fc",
+          "sha256": "3f521d71a610ff78f5da0fb193a4a3e82ac1478a8e52f0a4adef5dd6d3449148",
+          "sha1": "75f2510975913ae9402c8f5fc2bda35df6ea346f",
+          "md5": "f8349b9a85e5893da7d68ad46d782854"
         }
       ]
     }
