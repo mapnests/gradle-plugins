@@ -15,7 +15,7 @@ class ConfigLoaderPlugin : Plugin<Project> {
         const val CLIENT_CONFIG_JSON_FILE_NAME = "bind-client-config.json"
 
         const val KEY_ID = "key_id"
-        const val PACKAGE_NAME = "package_name"
+        const val PACKAGES = "packages" // Updated from package_name
         const val PUBLIC_KEY = "public_key"
         const val ALG = "alg"
         const val HASH = "hash"
@@ -28,14 +28,13 @@ class ConfigLoaderPlugin : Plugin<Project> {
 
     data class ClientConfig(
         val keyId: String,
-        val packageName: String,
+        val packages: List<String>, // Changed from packageName: String
         val publicKey: String,
         val alg: String,
         val HASH: String,
-        val SHA256: String,
+        val sha256s: List<String>, // Changed from SHA256: String
         val CLIENT_IDENTITY: String,
         val KEY_IDENTIFIER: String,
-
     )
 
     override fun apply(project: Project) {
@@ -90,14 +89,13 @@ class ConfigLoaderPlugin : Plugin<Project> {
         val jsonObj = gson.fromJson(jsonFile.readText(), JsonObject::class.java)
         return ClientConfig(
             keyId = jsonObj[KEY_ID]?.asString.orEmpty(),
-            packageName = jsonObj[PACKAGE_NAME]?.asString.orEmpty(),
+            packages = jsonObj[PACKAGES]?.asJsonArray?.map { it.asString } ?: emptyList(),
             publicKey = jsonObj[PUBLIC_KEY]?.asString.orEmpty(),
             alg = jsonObj[ALG]?.asString.orEmpty(),
             HASH = jsonObj[HASH]?.asString.orEmpty(),
-            SHA256 = jsonObj[SHA256]?.asString.orEmpty(),
+            sha256s = jsonObj[SHA256]?.asJsonArray?.map { it.asString } ?: emptyList(),
             CLIENT_IDENTITY = jsonObj[CLIENT_IDENTITY]?.asString.orEmpty(),
             KEY_IDENTIFIER = jsonObj[KEY_IDENTIFIER]?.asString.orEmpty(),
-
         )
     }
 
@@ -106,11 +104,11 @@ class ConfigLoaderPlugin : Plugin<Project> {
 
         object BindClientConfig {
             const val KEY_ID = "${config.keyId}"
-            const val PACKAGE_NAME = "${config.packageName}"
+            @JvmField val PACKAGES = arrayOf(${config.packages.joinToString { "\"$it\"" }})
             const val PUBLIC_KEY = "${config.publicKey}"
             const val ALG = "${config.alg}"
             const val HASH = "${config.HASH}"
-            const val SHA256 = "${config.SHA256}"
+            @JvmField val SHA256 = arrayOf(${config.sha256s.joinToString { "\"$it\"" }})
             const val CLIENT_IDENTITY = "${config.CLIENT_IDENTITY}"
             const val KEY_IDENTIFIER = "${config.KEY_IDENTIFIER}"
 
@@ -124,13 +122,13 @@ class ConfigLoaderPlugin : Plugin<Project> {
             private BindClientConfigLib() {}
 
             public static final String KEY_ID = "${config.keyId}";
-            public static final String PACKAGE_NAME = "${config.packageName}";
+            public static final String[] PACKAGES = new String[]{${config.packages.joinToString { "\"$it\"" }}};
             public static final String PUBLIC_KEY = "${config.publicKey}";
             public static final String ALG = "${config.alg}";
             public static final String HASH = "${config.HASH}";
-            public static final String SHA256 = "${config.SHA256}";
+            public static final String[] SHA256 = new String[]{${config.sha256s.joinToString { "\"$it\"" }}};
             public static final String CLIENT_IDENTITY = "${config.CLIENT_IDENTITY}";
-            public static final String KEY_IDENTIFIER = "${config.KEY_IDENTIFIER}"; 
+            public static final String KEY_IDENTIFIER = "${config.KEY_IDENTIFIER}";
         }
     """.trimIndent()
 }
