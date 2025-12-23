@@ -15,11 +15,11 @@ class ConfigLoaderPlugin : Plugin<Project> {
         const val CLIENT_CONFIG_JSON_FILE_NAME = "bind-client-config.json"
 
         const val KEY_ID = "key_id"
-        const val PACKAGES = "packages" // Updated from package_name
+        const val APP_ID = "app_id"
         const val PUBLIC_KEY = "public_key"
         const val ALG = "alg"
         const val HASH = "hash"
-        const val SHA256 = "sha256"
+        const val DATA_IDENTITY = "data_identity"
         const val CLIENT_IDENTITY = "client_identity"
         const val KEY_IDENTIFIER = "key_identifier"
     }
@@ -28,13 +28,13 @@ class ConfigLoaderPlugin : Plugin<Project> {
 
     data class ClientConfig(
         val keyId: String,
-        val packages: List<String>, // Changed from packageName: String
+        val appId: String,
         val publicKey: String,
-        val alg: String,
-        val HASH: String,
-        val sha256s: List<String>, // Changed from SHA256: String
-        val CLIENT_IDENTITY: String,
-        val KEY_IDENTIFIER: String,
+        val alg: List<String>,
+        val hash: String,
+        val dataIdentity: String,
+        val clientIdentity: String,
+        val keyIdentifier: String
     )
 
     override fun apply(project: Project) {
@@ -58,44 +58,51 @@ class ConfigLoaderPlugin : Plugin<Project> {
                     else
                         "generated/mapnests/config/src/main/kotlin/com/mapnests/mapsdk/generated"
                 )
-                .get().asFile
+                .get()
+                .asFile
             outputDir.mkdirs()
 
             val outputFile = File(
                 outputDir,
                 if (isLibrary) "BindClientConfigLib.java" else "BindClientConfig.kt"
             )
+
             if (isLibrary) {
                 outputFile.writeText(generateJavaConfig(config))
             } else {
                 outputFile.writeText(generateKotlinConfig(config))
             }
 
-            project.logger.lifecycle("📦✅ Generated ${outputFile.name} at ${outputFile.path}")
+            project.logger.lifecycle("📦 Generated ${outputFile.name} → ${outputFile.absolutePath}")
 
-            // Add generated sources to source set
-            val androidExtension = project.extensions.findByType(BaseExtension::class.java)
-            androidExtension?.sourceSets?.getByName("main")?.java?.srcDir(outputDir)
+            // Register generated source
+            project.extensions.findByType(BaseExtension::class.java)
+                ?.sourceSets
+                ?.getByName("main")
+                ?.java
+                ?.srcDir(outputDir)
         }
     }
 
     private fun loadClientConfig(project: Project): ClientConfig? {
         val jsonFile = File(project.rootProject.projectDir, CLIENT_CONFIG_JSON_FILE_NAME)
+
         if (!jsonFile.exists()) {
-            project.logger.warn("⚠️ No $CLIENT_CONFIG_JSON_FILE_NAME found in ${project.rootProject.name}")
+            project.logger.warn("⚠️ $CLIENT_CONFIG_JSON_FILE_NAME not found in root project")
             return null
         }
 
-        val jsonObj = gson.fromJson(jsonFile.readText(), JsonObject::class.java)
+        val json = gson.fromJson(jsonFile.readText(), JsonObject::class.java)
+
         return ClientConfig(
-            keyId = jsonObj[KEY_ID]?.asString.orEmpty(),
-            packages = jsonObj[PACKAGES]?.asJsonArray?.map { it.asString } ?: emptyList(),
-            publicKey = jsonObj[PUBLIC_KEY]?.asString.orEmpty(),
-            alg = jsonObj[ALG]?.asString.orEmpty(),
-            HASH = jsonObj[HASH]?.asString.orEmpty(),
-            sha256s = jsonObj[SHA256]?.asJsonArray?.map { it.asString } ?: emptyList(),
-            CLIENT_IDENTITY = jsonObj[CLIENT_IDENTITY]?.asString.orEmpty(),
-            KEY_IDENTIFIER = jsonObj[KEY_IDENTIFIER]?.asString.orEmpty(),
+            keyId = json[KEY_ID]?.asString.orEmpty(),
+            appId = json[APP_ID]?.asString.orEmpty(),
+            publicKey = json[PUBLIC_KEY]?.asString.orEmpty(),
+            alg = json[ALG]?.asJsonArray?.map { it.asString } ?: emptyList(),
+            hash = json[HASH]?.asString.orEmpty(),
+            dataIdentity = json[DATA_IDENTITY]?.asString.orEmpty(),
+            clientIdentity = json[CLIENT_IDENTITY]?.asString.orEmpty(),
+            keyIdentifier = json[KEY_IDENTIFIER]?.asString.orEmpty()
         )
     }
 
@@ -104,14 +111,13 @@ class ConfigLoaderPlugin : Plugin<Project> {
 
         object BindClientConfig {
             const val KEY_ID = "${config.keyId}"
-            @JvmField val PACKAGES = arrayOf(${config.packages.joinToString { "\"$it\"" }})
+            const val APP_ID = "${config.appId}"
             const val PUBLIC_KEY = "${config.publicKey}"
-            const val ALG = "${config.alg}"
-            const val HASH = "${config.HASH}"
-            @JvmField val SHA256 = arrayOf(${config.sha256s.joinToString { "\"$it\"" }})
-            const val CLIENT_IDENTITY = "${config.CLIENT_IDENTITY}"
-            const val KEY_IDENTIFIER = "${config.KEY_IDENTIFIER}"
-
+            @JvmField val ALG = arrayOf(${config.alg.joinToString { "\"$it\"" }})
+            const val HASH = "${config.hash}"
+            const val DATA_IDENTITY = "${config.dataIdentity}"
+            const val CLIENT_IDENTITY = "${config.clientIdentity}"
+            const val KEY_IDENTIFIER = "${config.keyIdentifier}"
         }
     """.trimIndent()
 
@@ -122,13 +128,13 @@ class ConfigLoaderPlugin : Plugin<Project> {
             private BindClientConfigLib() {}
 
             public static final String KEY_ID = "${config.keyId}";
-            public static final String[] PACKAGES = new String[]{${config.packages.joinToString { "\"$it\"" }}};
+            public static final String APP_ID = "${config.appId}";
             public static final String PUBLIC_KEY = "${config.publicKey}";
-            public static final String ALG = "${config.alg}";
-            public static final String HASH = "${config.HASH}";
-            public static final String[] SHA256 = new String[]{${config.sha256s.joinToString { "\"$it\"" }}};
-            public static final String CLIENT_IDENTITY = "${config.CLIENT_IDENTITY}";
-            public static final String KEY_IDENTIFIER = "${config.KEY_IDENTIFIER}";
+            public static final String[] ALG = new String[]{${config.alg.joinToString { "\"$it\"" }}};
+            public static final String HASH = "${config.hash}";
+            public static final String DATA_IDENTITY = "${config.dataIdentity}";
+            public static final String CLIENT_IDENTITY = "${config.clientIdentity}";
+            public static final String KEY_IDENTIFIER = "${config.keyIdentifier}";
         }
     """.trimIndent()
 }
