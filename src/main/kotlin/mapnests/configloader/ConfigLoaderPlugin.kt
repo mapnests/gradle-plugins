@@ -22,6 +22,7 @@ class ConfigLoaderPlugin : Plugin<Project> {
         const val DATA_IDENTITY = "data_identity"
         const val CLIENT_IDENTITY = "client_identity"
         const val KEY_IDENTIFIER = "key_identifier"
+        const val PLATFORM = "platform"
     }
 
     private val gson = Gson()
@@ -34,7 +35,8 @@ class ConfigLoaderPlugin : Plugin<Project> {
         val hash: String,
         val dataIdentity: String,
         val clientIdentity: String,
-        val keyIdentifier: String
+        val keyIdentifier: String,
+        val platform: String
     )
 
     override fun apply(project: Project) {
@@ -102,7 +104,8 @@ class ConfigLoaderPlugin : Plugin<Project> {
             hash = json[HASH]?.asString.orEmpty(),
             dataIdentity = json[DATA_IDENTITY]?.asString.orEmpty(),
             clientIdentity = json[CLIENT_IDENTITY]?.asString.orEmpty(),
-            keyIdentifier = json[KEY_IDENTIFIER]?.asString.orEmpty()
+            keyIdentifier = json[KEY_IDENTIFIER]?.asString.orEmpty(),
+            platform = json[PLATFORM]?.asString.orEmpty()
         )
     }
 
@@ -118,6 +121,7 @@ class ConfigLoaderPlugin : Plugin<Project> {
             const val DATA_IDENTITY = "${config.dataIdentity}"
             const val CLIENT_IDENTITY = "${config.clientIdentity}"
             const val KEY_IDENTIFIER = "${config.keyIdentifier}"
+            const val PLATFORM = "${config.platform}"
         }
     """.trimIndent()
 
@@ -135,6 +139,7 @@ class ConfigLoaderPlugin : Plugin<Project> {
             public static final String DATA_IDENTITY = "${config.dataIdentity}";
             public static final String CLIENT_IDENTITY = "${config.clientIdentity}";
             public static final String KEY_IDENTIFIER = "${config.keyIdentifier}";
+            public static final String PLATFORM = "${config.platform}";
         }
     """.trimIndent()
 }

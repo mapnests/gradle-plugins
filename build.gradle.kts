@@ -15,7 +15,7 @@ dependencies {
 }
 
 group = "com.mapnests"
-version = "3.0.0"
+version = "4.0.0"
 
 gradlePlugin {
     website.set("https://github.com/mapnests/gradle-plugins")
